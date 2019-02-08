@@ -14,7 +14,7 @@ def order(bot, update):
     title = 'Ваш заказ...'
     description = "Описание заказа"
     payload = "Отправлено с помощью телеграм бота"
-    provider_token = "401643678:TEST:f102314d-956d-4a84-8354-1b7df71e57b4"
+    provider_token = "401643678:TEST:5e9fcf5b-6fd3-471f-9f44-9973107b5dce"
     start_parameter = "test-payment"
     currency = "RUB"
     prices = shopping_cart
