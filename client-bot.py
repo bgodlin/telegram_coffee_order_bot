@@ -6,7 +6,7 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler,
 shopping_cart = [LabeledPrice('Капучино', 5000), LabeledPrice('Латте', 6500)]
 
 def start_callback(bot, update):
-    msg = "Добро пожаловать в Cuppy Bot, где вы можете заказывать кофе прямо из Телеграм. Нажмите /order"
+    msg = "Добро пожаловать в Test Coffee Bot, где вы можете заказывать кофе прямо из Телеграм. Нажмите /order"
     update.message.reply_text(msg)
 
 def order(bot, update):
