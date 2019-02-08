@@ -39,7 +39,7 @@ def successful_payment_callback(bot, update):
 
 def main():
     # API бота
-    updater = Updater(token="659667122:AAHDlp0jS9gMXB6Sljga9MZnS8e3gsAgUfs")
+    updater = Updater(token="718571818:AAE3kvTrfr9P7sUMeJAsMmVi7Tv8ghTAwC0")
 
     # Хэндлеры для выполнении функции при вводе определенных команда
     dp = updater.dispatcher
