@@ -1,13 +1,12 @@
-from telegram import (LabeledPrice)
-from telegram.ext import (Updater, CommandHandler, MessageHandler,
-                          Filters, PreCheckoutQueryHandler)
+from telegram import LabeledPrice
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, PreCheckoutQueryHandler
+import json
 
-# Корзина (доделать)
-shopping_cart = [LabeledPrice('Капучино', 5000), LabeledPrice('Латте', 6500)]
 
 def start_callback(bot, update):
     msg = "Добро пожаловать в Test Coffee Bot, где вы можете заказывать кофе прямо из Телеграм. Нажмите /order"
     update.message.reply_text(msg)
+
 
 def order(bot, update):
     chat_id = update.message.chat_id
@@ -17,11 +16,20 @@ def order(bot, update):
     provider_token = "401643678:TEST:5e9fcf5b-6fd3-471f-9f44-9973107b5dce"
     start_parameter = "test-payment"
     currency = "RUB"
-    prices = shopping_cart
+    prices = parse_items()
     bot.sendInvoice(chat_id, title, description, payload,
                     provider_token, start_parameter, currency, prices,
-                    need_name = True, need_phone_number = True,
-                                          need_email = False)
+                    need_name=True, need_phone_number=True,
+                    need_email=False)
+
+
+def parse_items():
+    with open('items.json') as f:
+        items = json.load(f)
+    shopping_cart = []
+    for item in items:
+        shopping_cart.append(LabeledPrice(item["name"], item["price"]))
+    return shopping_cart
 
 
 # Первая форма сбербанк
@@ -56,11 +64,7 @@ def main():
     # Успешная оплата
     dp.add_handler(MessageHandler(Filters.successful_payment, successful_payment_callback))
 
-
-
     updater.start_polling()
-
-
 
 
 if __name__ == '__main__':
